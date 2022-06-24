@@ -3,18 +3,16 @@ package com.its.board.entity;
 import com.its.board.dto.BoardDTO;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Getter @Setter
 @Table(name = "board_table")
 public class BoardEntity {
   @Id
-  @Column
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @Column(length = 50)
@@ -30,9 +28,10 @@ public class BoardEntity {
   private String boardContents;
 
   @Column
+  @ColumnDefault("0")
   private int boardHits;
 
-  public BoardEntity toBoardEntity(BoardDTO boardDTO) {
+  public static BoardEntity toBoardEntity(BoardDTO boardDTO) {
     System.out.println("BoardEntity.toBoardEntity");
 
     BoardEntity boardEntity = new BoardEntity();

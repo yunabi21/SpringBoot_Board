@@ -24,7 +24,7 @@ public class BoardDTO {
     this.boardHits = boardHits;
   }
 
-  public BoardDTO toBoardDTO(BoardEntity boardEntity) {
+  public static BoardDTO toBoardDTO(BoardEntity boardEntity) {
     System.out.println("BoardDTO.toBoardDTO");
 
     BoardDTO boardDTO = new BoardDTO();
