@@ -48,4 +48,11 @@ public class BoardService {
 
     return boardDTOList;
   }
+
+  public void update(BoardDTO boardDTO) {
+    System.out.println("BoardService.update");
+
+    BoardEntity boardEntity = BoardEntity.toBoardEntity(boardDTO);
+    boardRepository.save(boardEntity);
+  }
 }

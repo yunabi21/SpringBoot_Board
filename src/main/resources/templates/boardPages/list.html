@@ -33,7 +33,7 @@
     <tbody>
       <tr th:each="board: ${boardList}">
         <td th:text="${board.getId()}"></td>
-        <td th:text="${board.getBoardTitle()}"></td>
+        <td><a th:href="@{|/board/${board.getId()}|}" th:text="${board.getBoardTitle()}"></a></td>
         <td th:text="${board.getBoardWriter()}"></td>
         <td th:text="${board.getBoardPassword()}"></td>
         <td th:text="${board.getBoardContents()}"></td>

@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,5 +40,34 @@ public class BoardController {
     model.addAttribute("boardList", boardDTOList);
 
     return "/boardPages/list";
+  }
+
+  @GetMapping("/{id}")
+  public String detail (@PathVariable("id") Long id, Model model) {
+    System.out.println("BoardController.detail");
+
+    BoardDTO boardDTO = boardService.findById(id);
+    model.addAttribute("board", boardDTO);
+
+    return "/boardPages/detail";
+  }
+
+  @GetMapping("/update/{id}")
+  public String updateForm (@PathVariable("id") Long id, Model model) {
+    System.out.println("BoardController.updateForm");
+
+    BoardDTO boardDTO = boardService.findById(id);
+    model.addAttribute("board", boardDTO);
+
+    return "/boardPages/updateForm";
+  }
+
+  @PostMapping("/update/{id}")
+  public String update (@PathVariable("id") Long id, @ModelAttribute BoardDTO boardDTO) {
+    System.out.println("BoardController.update");
+
+    boardService.update(boardDTO);
+
+    return "redirect:/board/" + id;
   }
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>detail</title>
+</head>
+<body>
+  <h2>detail.html</h2>
+  <input type="hidden" name="id" id="id" th:value="${board.getId()}">
+  제목 : <span th:text="${board.getBoardTitle()}"></span><br />
+  작성자 : <span th:text="${board.getBoardWriter()}"></span><br />
+  내용 : <span th:text="${board.getBoardContents()}"></span><br />
+  조회수 : <span th:text="${board.getBoardHits()}"></span><br />
+  <button type="button" onclick="beforeBoardUpdate()">수정하기</button>
+  <button type="button" th:onclick="boardDelete(${board.getId()})">삭제하기</button>
+  <span class="input-area"></span>
+</body>
+<script>
+  const beforeBoardUpdate = () => {
+    let output = '<input type="text" id="boardPassword" placeholder="비밀번호 입력">';
+    output += '<button type="button" onclick="checkPassword()">비밀번호 확인</button>';
+
+    document.querySelector(".input-area").innerHTML = output;
+  }
+
+  const checkPassword = () => {
+    const boardId = document.getElementById("id").value;
+    const inputPassword = document.getElementById("boardPassword").value;
+    const userPassword = [[${board.getBoardPassword}]];
+
+    if (inputPassword === userPassword) {
+      location.href = '/board/update/' + boardId;
+    } else {
+      alert('비밀번호가 달라요');
+    }
+  }
+</script>
+</html>
