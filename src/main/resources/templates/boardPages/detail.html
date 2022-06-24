@@ -11,8 +11,8 @@
   작성자 : <span th:text="${board.getBoardWriter()}"></span><br />
   내용 : <span th:text="${board.getBoardContents()}"></span><br />
   조회수 : <span th:text="${board.getBoardHits()}"></span><br />
-  작성일자 : <span th:text="${board.getBoardCreatedTime()}"></span><br/>
-  수정일자 : <span th:text="${board.getBoardUpdatedTime()}"></span><br/>
+  작성일자 : <span th:text="*{#temporals.format(board.getBoardCreatedTime(), 'yyyy-MM-dd HH:mm:ss')}"></span><br/>
+  수정일자 : <span th:text="*{#temporals.format(board.getBoardUpdatedTime(), 'yyyy-MM-dd HH:mm:ss')}"></span><br/>
   <button type="button" onclick="beforeBoardUpdate()">수정하기</button>
   <button type="button" onclick="beforeBoardDelete()">삭제하기</button>
   <button type="button" onclick="backToList()">목록으로</button>

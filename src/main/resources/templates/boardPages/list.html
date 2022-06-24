@@ -40,8 +40,8 @@
         <td th:text="${board.getBoardPassword()}"></td>
         <td th:text="${board.getBoardContents()}"></td>
         <td th:text="${board.getBoardHits()}"></td>
-        <td th:text="${board.getBoardCreatedTime()}"></td>
-        <td th:text="${board.getBoardUpdatedTime()}"></td>
+        <td th:text="*{#temporals.format(board.getBoardCreatedTime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="*{#temporals.format(board.getBoardUpdatedTime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
       </tr>
     </tbody>
   </table>
