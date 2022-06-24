@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +17,8 @@ public class BoardDTO {
   private String boardPassword;
   private String boardContents;
   private int boardHits;
+  private LocalDateTime boardCreatedTime;
+  private LocalDateTime boardUpdatedTime;
 
   public BoardDTO(String boardTitle, String boardWriter, String boardPassword, String boardContents, int boardHits) {
     this.boardTitle = boardTitle;
@@ -34,6 +38,8 @@ public class BoardDTO {
     boardDTO.setBoardPassword(boardEntity.getBoardPassword());
     boardDTO.setBoardContents(boardEntity.getBoardContents());
     boardDTO.setBoardHits(boardEntity.getBoardHits());
+    boardDTO.setBoardCreatedTime(boardEntity.getCreatedTime());
+    boardDTO.setBoardUpdatedTime(boardEntity.getUpdatedTime());
 
     return boardDTO;
   }

@@ -11,8 +11,10 @@
   작성자 : <span th:text="${board.getBoardWriter()}"></span><br />
   내용 : <span th:text="${board.getBoardContents()}"></span><br />
   조회수 : <span th:text="${board.getBoardHits()}"></span><br />
+  작성일자 : <span th:text="${board.getBoardCreatedTime()}"></span><br/>
+  수정일자 : <span th:text="${board.getBoardUpdatedTime()}"></span><br/>
   <button type="button" onclick="beforeBoardUpdate()">수정하기</button>
-  <button type="button" th:onclick="boardDelete(${board.getId()})">삭제하기</button>
+  <button type="button" onclick="beforeBoardDelete()">삭제하기</button>
   <button type="button" onclick="backToList()">목록으로</button>
   <span class="input-area"></span>
 </body>
@@ -31,6 +33,25 @@
 
     if (inputPassword === userPassword) {
       location.href = '/board/update/' + boardId;
+    } else {
+      alert('비밀번호가 달라요');
+    }
+  }
+
+  const beforeBoardDelete = () => {
+    let output = '<br/><input type="text" id="boardPassword" placeholder="비밀번호 입력">';
+    output += '<button type="button" onclick="checkPassword2()">비밀번호 확인</button>';
+
+    document.querySelector(".input-area").innerHTML = output;
+  }
+
+  const checkPassword2 = () => {
+    const boardId = document.getElementById("id").value;
+    const inputPassword = document.getElementById("boardPassword").value;
+    const userPassword = '[[${board.getBoardPassword}]]';
+
+    if (inputPassword === userPassword) {
+      location.href = '/board/delete/' + boardId;
     } else {
       alert('비밀번호가 달라요');
     }

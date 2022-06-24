@@ -28,6 +28,8 @@
         <td>boardPassword</td>
         <td>boardContents</td>
         <td>boardHits</td>
+        <td>boardCreatedTime</td>
+        <td>boardUpdatedTime</td>
       </tr>
     </thead>
     <tbody>
@@ -38,6 +40,8 @@
         <td th:text="${board.getBoardPassword()}"></td>
         <td th:text="${board.getBoardContents()}"></td>
         <td th:text="${board.getBoardHits()}"></td>
+        <td th:text="${board.getBoardCreatedTime()}"></td>
+        <td th:text="${board.getBoardUpdatedTime()}"></td>
       </tr>
     </tbody>
   </table>

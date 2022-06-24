@@ -71,4 +71,13 @@ public class BoardController {
 
     return "redirect:/board/" + id;
   }
+
+  @GetMapping("/delete/{id}")
+  public String delete (@PathVariable("id") Long id) {
+    System.out.println("BoardController.delete");
+
+    boardService.delete(id);
+
+    return "redirect:/board/";
+  }
 }

@@ -57,4 +57,10 @@ public class BoardService {
 
     boardRepository.save(boardEntity);
   }
+
+  public void delete(Long id) {
+    System.out.println("BoardService.delete");
+
+    boardRepository.deleteById(id);
+  }
 }
