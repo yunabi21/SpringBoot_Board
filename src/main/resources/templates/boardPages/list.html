@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>list</title>
+  <style>
+    .table {
+      border: 1px solid #aaa;
+    }
+    .table tr {
+      width: 600px;
+      height: 40px;
+    }
+    .table td {
+      align-content: space-evenly;
+    }
+  </style>
+</head>
+<body>
+  <h2>list.html</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <td>id</td>
+        <td>boardTitle</td>
+        <td>boardWriter</td>
+        <td>boardPassword</td>
+        <td>boardContents</td>
+        <td>boardHits</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="board: ${boardList}">
+        <td th:text="${board.getId()}"></td>
+        <td th:text="${board.getBoardTitle()}"></td>
+        <td th:text="${board.getBoardWriter()}"></td>
+        <td th:text="${board.getBoardPassword()}"></td>
+        <td th:text="${board.getBoardContents()}"></td>
+        <td th:text="${board.getBoardHits()}"></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

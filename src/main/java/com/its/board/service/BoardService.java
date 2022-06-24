@@ -6,6 +6,8 @@ import com.its.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,5 +34,18 @@ public class BoardService {
     } else {
       return null;
     }
+  }
+
+  public List<BoardDTO> findAll() {
+    System.out.println("BoardService.findAll");
+
+    List<BoardEntity> boardEntityList = boardRepository.findAll();
+    List<BoardDTO> boardDTOList = new ArrayList<>();
+
+    for (BoardEntity boardEntity : boardEntityList) {
+      boardDTOList.add(BoardDTO.toBoardDTO(boardEntity));
+    }
+
+    return boardDTOList;
   }
 }
