@@ -65,6 +65,7 @@ public class BoardController {
   @PostMapping("/update/{id}")
   public String update (@PathVariable("id") Long id, @ModelAttribute BoardDTO boardDTO) {
     System.out.println("BoardController.update");
+    System.out.println(boardDTO);
 
     boardService.update(boardDTO);
 

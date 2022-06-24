@@ -52,7 +52,9 @@ public class BoardService {
   public void update(BoardDTO boardDTO) {
     System.out.println("BoardService.update");
 
-    BoardEntity boardEntity = BoardEntity.toBoardEntity(boardDTO);
+    BoardEntity boardEntity = BoardEntity.toUpdateBoardEntity(boardDTO);
+    System.out.println(boardEntity);
+
     boardRepository.save(boardEntity);
   }
 }

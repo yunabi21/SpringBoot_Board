@@ -7,7 +7,7 @@
 <body>
   <h2>updateForm.html</h2>
 
-  <form th:action="/board/update/${board.getId()}" method="post">
+  <form th:action="@{|/board/update/${board.getId()}|}" method="post">
     <input type="hidden" name="id" th:value="${board.getId()}">
     제목 : <input type="text" name="boardTitle" th:value="${board.getBoardTitle()}"><br/>
     작성자 : <input type="text" name="boardWriter" th:value="${board.getBoardWriter()}"><br/>

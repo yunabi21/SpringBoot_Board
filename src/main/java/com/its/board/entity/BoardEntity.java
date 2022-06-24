@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Getter @Setter
 @Table(name = "board_table")
-public class BoardEntity {
+public class BoardEntity extends BaseEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -35,6 +35,20 @@ public class BoardEntity {
     System.out.println("BoardEntity.toBoardEntity");
 
     BoardEntity boardEntity = new BoardEntity();
+    boardEntity.setBoardTitle(boardDTO.getBoardTitle());
+    boardEntity.setBoardWriter(boardDTO.getBoardWriter());
+    boardEntity.setBoardPassword(boardDTO.getBoardPassword());
+    boardEntity.setBoardContents(boardDTO.getBoardContents());
+    boardEntity.setBoardHits(boardDTO.getBoardHits());
+
+    return boardEntity;
+  }
+
+  public static BoardEntity toUpdateBoardEntity(BoardDTO boardDTO) {
+    System.out.println("BoardEntity.toUpdateBoardEntity");
+
+    BoardEntity boardEntity = new BoardEntity();
+    boardEntity.setId(boardDTO.getId());
     boardEntity.setBoardTitle(boardDTO.getBoardTitle());
     boardEntity.setBoardWriter(boardDTO.getBoardWriter());
     boardEntity.setBoardPassword(boardDTO.getBoardPassword());
