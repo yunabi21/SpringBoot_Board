@@ -6,6 +6,7 @@ import com.its.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,8 +25,13 @@ public class BoardService {
     return boardRepository.save(boardEntity).getId();
   }
 
+  @Transactional
   public BoardDTO findById(Long id) {
     System.out.println("BoardService.findById");
+
+    //  조회수 처리
+    // native sql: update board_table set boardHits = boardHits + 1 where id = ?
+    boardRepository.boardHits(id);
 
     Optional<BoardEntity> boardEntityOptional = boardRepository.findById(id);
     if (boardEntityOptional.isPresent()) {

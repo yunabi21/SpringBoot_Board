@@ -43,7 +43,7 @@ public class BoardController {
   }
 
   @GetMapping("/{id}")
-  public String detail (@PathVariable("id") Long id, Model model) {
+  public String detail(@PathVariable("id") Long id, Model model) {
     System.out.println("BoardController.detail");
 
     BoardDTO boardDTO = boardService.findById(id);
@@ -53,7 +53,7 @@ public class BoardController {
   }
 
   @GetMapping("/update/{id}")
-  public String updateForm (@PathVariable("id") Long id, Model model) {
+  public String updateForm(@PathVariable("id") Long id, Model model) {
     System.out.println("BoardController.updateForm");
 
     BoardDTO boardDTO = boardService.findById(id);
@@ -63,7 +63,7 @@ public class BoardController {
   }
 
   @PostMapping("/update/{id}")
-  public String update (@PathVariable("id") Long id, @ModelAttribute BoardDTO boardDTO) {
+  public String update(@PathVariable("id") Long id, @ModelAttribute BoardDTO boardDTO) {
     System.out.println("BoardController.update");
     System.out.println(boardDTO);
 
@@ -73,7 +73,7 @@ public class BoardController {
   }
 
   @GetMapping("/delete/{id}")
-  public String delete (@PathVariable("id") Long id) {
+  public String delete(@PathVariable("id") Long id) {
     System.out.println("BoardController.delete");
 
     boardService.delete(id);
