@@ -31,6 +31,9 @@ public class BoardEntity extends BaseEntity {
   @ColumnDefault("0")
   private int boardHits;
 
+  @Column
+  private String boardFileName;
+
   public static BoardEntity toBoardEntity(BoardDTO boardDTO) {
     System.out.println("BoardEntity.toBoardEntity");
 
@@ -40,6 +43,7 @@ public class BoardEntity extends BaseEntity {
     boardEntity.setBoardPassword(boardDTO.getBoardPassword());
     boardEntity.setBoardContents(boardDTO.getBoardContents());
     boardEntity.setBoardHits(boardDTO.getBoardHits());
+    boardEntity.setBoardFileName(boardDTO.getBoardFileName());
 
     return boardEntity;
   }
@@ -54,6 +58,7 @@ public class BoardEntity extends BaseEntity {
     boardEntity.setBoardPassword(boardDTO.getBoardPassword());
     boardEntity.setBoardContents(boardDTO.getBoardContents());
     boardEntity.setBoardHits(boardDTO.getBoardHits());
+    boardEntity.setBoardFileName(boardDTO.getBoardFileName());
 
     return boardEntity;
   }

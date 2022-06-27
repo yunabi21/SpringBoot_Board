@@ -30,6 +30,7 @@
         <td>boardHits</td>
         <td>boardCreatedTime</td>
         <td>boardUpdatedTime</td>
+        <td>boardFileName</td>
       </tr>
     </thead>
     <tbody>
@@ -42,6 +43,7 @@
         <td th:text="${board.getBoardHits()}"></td>
         <td th:text="*{#temporals.format(board.getBoardCreatedTime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
         <td th:text="*{#temporals.format(board.getBoardUpdatedTime(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td><img th:src="@{|/upload/${board.boardFileName}|}" width="50" height="50" alt=""></td>
       </tr>
     </tbody>
   </table>

@@ -13,47 +13,74 @@
   조회수 : <span th:text="${board.getBoardHits()}"></span><br />
   작성일자 : <span th:text="*{#temporals.format(board.getBoardCreatedTime(), 'yyyy-MM-dd HH:mm:ss')}"></span><br/>
   수정일자 : <span th:text="*{#temporals.format(board.getBoardUpdatedTime(), 'yyyy-MM-dd HH:mm:ss')}"></span><br/>
-  <button type="button" onclick="beforeBoardUpdate()">수정하기</button>
-  <button type="button" onclick="beforeBoardDelete()">삭제하기</button>
+<!--  <button type="button" onclick="beforeBoardUpdate()">수정하기</button>-->
+<!--  <button type="button" onclick="beforeBoardDelete()">삭제하기</button>-->
+  <button type="button" onclick="req(1)">수정</button>
+  <button type="button" onclick="req(2)">삭제</button>
   <button type="button" onclick="backToList()">목록으로</button>
   <span class="input-area">
 
   </span>
 </body>
-<script>
-  const beforeBoardUpdate = () => {
-    let output = '<br/><input type="text" id="boardPassword" placeholder="비밀번호 입력">';
-    output += '<button type="button" onclick="checkPassword()">비밀번호 확인</button>';
+<script th:inline="javascript">
+  // const beforeBoardUpdate = () => {
+  //   let output = '<br/><input type="text" id="boardPassword" placeholder="비밀번호 입력">';
+  //   output += '<button type="button" onclick="checkPassword()">비밀번호 확인</button>';
+  //
+  //   document.querySelector(".input-area").innerHTML = output;
+  // }
+  //
+  // const checkPassword = () => {
+  //   const boardId = document.getElementById("id").value;
+  //   const inputPassword = document.getElementById("boardPassword").value;
+  //   const userPassword = '[[${board.getBoardPassword}]]';
+  //
+  //   if (inputPassword === userPassword) {
+  //     location.href = '/board/update/' + boardId;
+  //   } else {
+  //     alert('비밀번호가 달라요');
+  //   }
+  // }
+  //
+  // const beforeBoardDelete = () => {
+  //   let output = '<br/><input type="text" id="boardPassword" placeholder="비밀번호 입력">';
+  //   output += '<button type="button" onclick="checkPassword2()">비밀번호 확인</button>';
+  //
+  //   document.querySelector(".input-area").innerHTML = output;
+  // }
+  //
+  // const checkPassword2 = () => {
+  //   const boardId = document.getElementById("id").value;
+  //   const inputPassword = document.getElementById("boardPassword").value;
+  //   const userPassword = '[[${board.getBoardPassword}]]';
+  //
+  //   if (inputPassword === userPassword) {
+  //     location.href = '/board/delete/' + boardId;
+  //   } else {
+  //     alert('비밀번호가 달라요');
+  //   }
+  // }
 
-    document.querySelector(".input-area").innerHTML = output;
+  const req = (num) => {
+    let output = '<br/><input type="text" id="boardPassword" placeholder="비밀번호 입력">';
+      output += '<button type="button" onclick="checkPassword(' + num + ')">비밀번호 확인</button>';
+
+      document.querySelector(".input-area").innerHTML = output;
   }
 
-  const checkPassword = () => {
+  const checkPassword = (num) => {
     const boardId = document.getElementById("id").value;
     const inputPassword = document.getElementById("boardPassword").value;
-    const userPassword = '[[${board.getBoardPassword}]]';
+    const userPassword = [[${board.getBoardPassword}]];
+
+    console.log(userPassword);
 
     if (inputPassword === userPassword) {
-      location.href = '/board/update/' + boardId;
-    } else {
-      alert('비밀번호가 달라요');
-    }
-  }
-
-  const beforeBoardDelete = () => {
-    let output = '<br/><input type="text" id="boardPassword" placeholder="비밀번호 입력">';
-    output += '<button type="button" onclick="checkPassword2()">비밀번호 확인</button>';
-
-    document.querySelector(".input-area").innerHTML = output;
-  }
-
-  const checkPassword2 = () => {
-    const boardId = document.getElementById("id").value;
-    const inputPassword = document.getElementById("boardPassword").value;
-    const userPassword = '[[${board.getBoardPassword}]]';
-
-    if (inputPassword === userPassword) {
-      location.href = '/board/delete/' + boardId;
+      if (num === 1) {
+        location.href = '/board/update/' + boardId;
+      } else {
+        location.href = '/board/delete/' + boardId;
+      }
     } else {
       alert('비밀번호가 달라요');
     }

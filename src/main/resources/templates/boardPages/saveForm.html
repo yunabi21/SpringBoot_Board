@@ -7,11 +7,12 @@
 <body>
   <h2>saveForm.html</h2>
 
-  <form th:action="@{/board/save}" method="post">
+  <form th:action="@{/board/save}" method="post" enctype="multipart/form-data">
     제목: <input type="text" name="boardTitle"><br/>
     작성자: <input type="text" name="boardWriter"><br/>
     비밀번호: <input type="text" name="boardPassword"><br/>
     내용: <input type="text" name="boardContents"><br/>
+    파일: <input type="file" name="boardFile"><br/>
     <button type="submit">작성하기</button>
   </form>
 </body>
