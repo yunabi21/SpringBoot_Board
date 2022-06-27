@@ -7,12 +7,13 @@
 <body>
   <h2>updateForm.html</h2>
 
-  <form th:action="@{|/board/update/${board.getId()}|}" method="post">
+  <form th:action="@{|/board/update/${board.getId()}|}" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" th:value="${board.getId()}">
     제목 : <input type="text" name="boardTitle" th:value="${board.getBoardTitle()}"><br/>
     작성자 : <input type="text" name="boardWriter" th:value="${board.getBoardWriter()}"><br/>
     <input type="hidden" name="boardPassword" th:value="${board.getBoardPassword()}">
     내용 : <input type="text" name="boardContents" th:value="${board.getBoardContents()}"><br/>
+    파일 : <input type="file" name="boardFile" th:value="${board.getBoardFileName()}"><br/>
     <button type="submit">수정하기</button>
   </form>
 </body>

@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -30,12 +31,13 @@ public class BoardService {
 
     MultipartFile boardFile = boardDTO.getBoardFile();
     String boardFileName = boardFile.getOriginalFilename();
-    boardFileName = System.currentTimeMillis() + "_" + boardFileName;
-    String savePath = "D:\\springboot_img\\" + boardFileName;
+
     if (!boardFile.isEmpty()) {
+      boardFileName = System.currentTimeMillis() + "_" + boardFileName;
+      String savePath = "D:\\springboot_img\\" + boardFileName;
       boardFile.transferTo(new File(savePath));
+      boardDTO.setBoardFileName((boardFileName));
     }
-    boardDTO.setBoardFileName((boardFileName));
 
     BoardEntity boardEntity = BoardEntity.toBoardEntity(boardDTO);
 
@@ -72,8 +74,45 @@ public class BoardService {
     return boardDTOList;
   }
 
-  public void update(BoardDTO boardDTO) {
+  @Transactional
+  public void update(BoardDTO boardDTO) throws IOException {
     System.out.println("BoardService.update");
+
+    BoardDTO findDTO = findById(boardDTO.getId());
+
+    MultipartFile boardFile = boardDTO.getBoardFile();
+    String boardFileName = boardFile.getOriginalFilename();
+
+    if (!Objects.equals(findDTO.getBoardFileName(), boardDTO.getBoardFileName())) {
+
+      if (!boardFile.isEmpty()) {
+        System.out.println("다른 파일로 수정");
+
+        boardFileName = System.currentTimeMillis() + "_" + boardFileName;
+        String savePath = "D:\\springboot_img\\" + boardFileName;
+        boardFile.transferTo(new File(savePath));
+        boardDTO.setBoardFileName(boardFileName);
+      } else {
+        System.out.println("파일을 없앨 때");
+
+        boardDTO.setBoardFileName(null);
+      }
+
+    } else if (findDTO.getBoardFileName() == null) {
+
+      if (!boardFile.isEmpty()) {
+        System.out.println("파일 넣기");
+
+        boardFileName = System.currentTimeMillis() + "_" + boardFileName;
+        String savePath = "D:\\springboot_img\\" + boardFileName;
+        boardFile.transferTo(new File(savePath));
+        boardDTO.setBoardFileName(boardFileName);
+      } else {
+        System.out.println("그대로 null");
+
+        boardDTO.setBoardFileName(null);
+      }
+    }
 
     BoardEntity boardEntity = BoardEntity.toUpdateBoardEntity(boardDTO);
     System.out.println(boardEntity);

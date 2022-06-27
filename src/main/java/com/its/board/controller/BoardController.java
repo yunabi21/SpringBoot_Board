@@ -68,7 +68,7 @@ public class BoardController {
   }
 
   @PostMapping("/update/{id}")
-  public String update(@PathVariable("id") Long id, @ModelAttribute BoardDTO boardDTO) {
+  public String update(@PathVariable("id") Long id, @ModelAttribute BoardDTO boardDTO) throws IOException {
     System.out.println("BoardController.update");
     System.out.println(boardDTO);
 
