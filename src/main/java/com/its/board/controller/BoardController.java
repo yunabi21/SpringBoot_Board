@@ -99,4 +99,15 @@ public class BoardController {
 
     return "boardPages/paging";
   }
+
+  // 검색
+  @GetMapping("/search")
+  public String search(@RequestParam("q") String q, Model model) {
+    System.out.println("BoardController.search");
+
+    List<BoardDTO> boardDTOList = boardService.search(q);
+    model.addAttribute("searchList", boardDTOList);
+
+    return "boardPages/search";
+  }
 }

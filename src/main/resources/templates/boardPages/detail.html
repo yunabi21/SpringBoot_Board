@@ -5,6 +5,7 @@
   <title>detail</title>
 </head>
 <body>
+<th:block th:replace="commonPages/header :: header"></th:block>
   <h2>detail.html</h2>
   <input type="hidden" name="id" id="id" th:value="${board.getId()}">
   제목 : <span th:text="${board.getBoardTitle()}"></span><br />

@@ -5,6 +5,7 @@
   <title>updateForm</title>
 </head>
 <body>
+<th:block th:replace="commonPages/header :: header"></th:block>
   <h2>updateForm.html</h2>
 
   <form th:action="@{|/board/update/${board.getId()}|}" method="post" enctype="multipart/form-data">

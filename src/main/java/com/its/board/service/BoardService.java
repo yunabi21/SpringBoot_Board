@@ -3,7 +3,9 @@ package com.its.board.service;
 import com.its.board.common.PagingConst;
 import com.its.board.dto.BoardDTO;
 import com.its.board.entity.BoardEntity;
+import com.its.board.entity.MemberEntity;
 import com.its.board.repository.BoardRepository;
+import com.its.board.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +26,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BoardService {
   private final BoardRepository boardRepository;
+  private final MemberRepository memberRepository;
 
 
   public Long save(BoardDTO boardDTO) throws IOException {
@@ -39,9 +42,15 @@ public class BoardService {
       boardDTO.setBoardFileName((boardFileName));
     }
 
-    BoardEntity boardEntity = BoardEntity.toBoardEntity(boardDTO);
-
-    return boardRepository.save(boardEntity).getId();
+    //  toBoardEntity 메서드에 MemberEntity 를 같이 전달해야 함 (로그인 이메일이 작성자와 동일하다는 전제)
+    Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(boardDTO.getBoardWriter());
+    if (optionalMemberEntity.isPresent()) {
+      MemberEntity memberEntity = optionalMemberEntity.get();
+      BoardEntity boardEntity = BoardEntity.toBoardEntity(boardDTO, memberEntity);
+      return boardRepository.save(boardEntity).getId();
+    } else {
+      return null;
+    }
   }
 
   @Transactional
@@ -61,6 +70,7 @@ public class BoardService {
     }
   }
 
+  @Transactional
   public List<BoardDTO> findAll() {
     System.out.println("BoardService.findAll");
 
@@ -143,5 +153,17 @@ public class BoardService {
             ));
 
     return boardList;
+  }
+
+  public List<BoardDTO> search(String q) {
+    System.out.println("BoardService.search");
+
+    List<BoardEntity> boardEntityList = boardRepository.findByBoardTitleContaining(q);
+    List<BoardDTO> boardDTOList = new ArrayList<>();
+
+    for (BoardEntity boardEntity : boardEntityList) {
+      boardDTOList.add(BoardDTO.toBoardDTO(boardEntity));
+    }
+    return boardDTOList;
   }
 }
